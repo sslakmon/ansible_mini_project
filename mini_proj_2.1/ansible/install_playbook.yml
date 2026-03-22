@@ -1,0 +1,61 @@
+- hosts: master
+  become: yes
+  tasks:
+
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+
+    - name: Clone project repo
+      git:
+        repo: "https://github.com/<your-user>/<your-repo>.git"
+        dest: /home/ansible/project
+        version: main
+        force: yes
+      become_user: ansible
+
+
+- hosts: slaves
+  become: yes
+  tasks:
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+        state: present
+
+    - name: Ensure ansible user owns .ssh directory
+      file:
+        path: /home/ansible/.ssh
+        owner: ansible
+        group: ansible
+        mode: '0700'
+
+    - name: Ensure authorized_keys permissions are correct
+      file:
+        path: /home/ansible/.ssh/authorized_keys
+        owner: ansible
+        group: ansible
+        mode: '0644'
+
+    - name: Create app directory
+      file:
+        path: /home/ansible/app
+        state: directory
+        owner: ansible
+        group: ansible
+
+    - name: Create db directory
+      file:
+        path: /home/ansible/db
+        state: directory
+        owner: ansible
+        group: ansible

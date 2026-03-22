@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    image: sslakmon/flask_app:v1.0
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: slave2
+      DB_PORT: "5432"
+      DB_NAME: "usersdb"
+      DB_USER: "admin"
+      DB_PASSWORD: "admin123"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5

@@ -1,0 +1,35 @@
+# ============================
+# DEPLOY DATABASE (slave2)
+# ============================
+- hosts: slave2
+  become: yes
+  tasks:
+
+    - name: Copy DB+pgAdmin docker-compose to slave2
+      copy:
+        src: /home/ansible/project/db/docker-compose.yml
+        dest: /home/ansible/db/docker-compose.yml
+        owner: ansible
+        group: ansible
+        mode: '0644'
+
+    - name: Run DB + pgAdmin
+      shell: docker compose -f /home/ansible/db/docker-compose.yml up -d
+
+# ============================
+# DEPLOY APP (slave1)
+# ============================
+- hosts: slave1
+  become: yes
+  tasks:
+
+    - name: Copy APP docker-compose to slave1
+      copy:
+        src: /home/ansible/project/app/docker-compose.yml
+        dest: /home/ansible/app/docker-compose.yml
+        owner: ansible
+        group: ansible
+        mode: '0644'
+
+    - name: Run APP
+      shell: docker compose -f /home/ansible/app/docker-compose.yml up -d
