@@ -7,7 +7,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      DB_HOST: postgres_db
+      DB_HOST: 172.17.0.1
       DB_PORT: "5432"
       DB_NAME: "usersdb"
       DB_USER: "admin"
