@@ -14,7 +14,7 @@
         mode: '0644'
 
     - name: Run DB + pgAdmin
-      shell: docker compose -f /home/ansible/db/docker-compose.yml up -d
+      shell: docker-compose -f /home/ansible/db/docker-compose.yml up -d
 
 # ============================
 # DEPLOY APP (slave1)
@@ -32,4 +32,4 @@
         mode: '0644'
 
     - name: Run APP
-      shell: docker compose -f /home/ansible/app/docker-compose.yml up -d
+      shell: docker-compose -f /home/ansible/app/docker-compose.yml up -d
