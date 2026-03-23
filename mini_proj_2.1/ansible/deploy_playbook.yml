@@ -7,7 +7,7 @@
 
     - name: Copy DB+pgAdmin docker-compose to slave2
       copy:
-        src: /home/ansible/project/db/docker-compose.yml
+        src: /home/ansible/project/mini_proj_2.1/ansible/db/docker-compose.yml
         dest: /home/ansible/db/docker-compose.yml
         owner: ansible
         group: ansible
@@ -25,7 +25,7 @@
 
     - name: Copy APP docker-compose to slave1
       copy:
-        src: /home/ansible/project/app/docker-compose.yml
+        src: /home/ansible/project/mini_proj_2.1/ansible/app/docker-compose.yml
         dest: /home/ansible/app/docker-compose.yml
         owner: ansible
         group: ansible
