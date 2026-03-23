@@ -15,11 +15,9 @@ services:
       - ansible_net
 
   slave1:
-    image: docker:dind
+    image: sslakmon/ansible-slave:v1.0
     container_name: slave1
     privileged: true
-    environment:
-      - DOCKER_TLS_CERTDIR=
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/authorized_keys
@@ -27,11 +25,9 @@ services:
       - ansible_net
 
   slave2:
-    image: docker:dind
+    image: sslakmon/ansible-slave:v1.0
     container_name: slave2
     privileged: true
-    environment:
-      - DOCKER_TLS_CERTDIR=
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/authorized_keys
