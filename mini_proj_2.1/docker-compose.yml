@@ -1,9 +1,11 @@
 version: "3.9"
 
 services:
+
   master:
     image: sslakmon/ansible-master:v1.0
     container_name: master
+    privileged: true
     volumes:
       - ./ssh_keys/ansible_key:/home/ansible/.ssh/id_rsa
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/id_rsa.pub
@@ -13,17 +15,25 @@ services:
       - ansible_net
 
   slave1:
-    image: sslakmon/ansible-slave:v1.0
+    image: docker:dind
     container_name: slave1
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/authorized_keys
     networks:
       - ansible_net
 
   slave2:
-    image: sslakmon/ansible-slave:v1.0
+    image: docker:dind
     container_name: slave2
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/authorized_keys
     networks:
       - ansible_net
