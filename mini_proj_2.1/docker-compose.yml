@@ -7,6 +7,7 @@ services:
     volumes:
       - ./ssh_keys/ansible_key:/home/ansible/.ssh/id_rsa
       - ./ssh_keys/ansible_key.pub:/home/ansible/.ssh/id_rsa.pub
+      - ./ssh_keys/authorized_keys:/home/ansible/.ssh/authorized_keys
       - ./ansible:/ansible
     networks:
       - ansible_net
