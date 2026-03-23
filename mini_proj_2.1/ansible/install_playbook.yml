@@ -10,7 +10,7 @@
 
     - name: Clone project repo
       git:
-        repo: "https://github.com/<your-user>/<your-repo>.git"
+        repo: "https://github.com/sslakmon/ansible_mini_project.git"
         dest: /home/ansible/project
         version: main
         force: yes
